@@ -179,7 +179,7 @@ export default function App() {
           </div>
           <div className="hero-side">
             <div className="photo">
-              <img src="/photo.png" alt="Portrait de Santatra Tsiory Andrianirina" width={270} height={270} />
+              <img src={`${import.meta.env.BASE_URL}photo.png`} alt="Portrait de Santatra Tsiory Andrianirina" width={270} height={270} />
             </div>
             <CodeCard />
           </div>

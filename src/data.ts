@@ -57,7 +57,8 @@ export const languages = [
 ];
 
 const dev = "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons";
-/* Logos : devicon (CDN). Si un logo est introuvable, une pastille avec les initiales s'affiche. */
+const simple = "https://jsdelivr.net";
+
 export const logos: Record<string, string> = {
   Java: `${dev}/java/java-original.svg`, "Spring Boot": `${dev}/spring/spring-original.svg`,
   Python: `${dev}/python/python-original.svg`, React: `${dev}/react/react-original.svg`,
@@ -65,7 +66,11 @@ export const logos: Record<string, string> = {
   MySQL: `${dev}/mysql/mysql-original.svg`, Docker: `${dev}/docker/docker-original.svg`,
   Git: `${dev}/git/git-original.svg`, "IntelliJ IDEA": `${dev}/intellij/intellij-original.svg`,
   "VS Code": `${dev}/vscode/vscode-original.svg`, "Android Studio": `${dev}/androidstudio/androidstudio-original.svg`,
-  Anaconda: `${dev}/anaconda/anaconda-original.svg`, Odoo: "", Camunda: "", "Power BI": "", "Spring AI": `${dev}/spring/spring-original.svg`,
+  Anaconda: `${dev}/anaconda/anaconda-original.svg`, 
+  Odoo: `${simple}/odoo.svg`, 
+  Camunda: `${simple}/camunda.svg`, 
+  "Power BI": `${simple}/powerbi.svg`, 
+  "Spring AI": `${dev}/spring/spring-original.svg`,
 };
 
 export const services = [
