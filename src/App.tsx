@@ -309,7 +309,7 @@ export default function App() {
                 <article className="project">
                   <Mockup
                     variant={p.variant}
-                    images={(p.images?.length ? p.images : p.image ? [p.image] : []).map((f) => `${import.meta.env.BASE_URL}${f}`)}
+                    images={(p.images?.length ? p.images : []).map((f) => `${import.meta.env.BASE_URL}${f}`)}
                     name={p.name}
                     onZoom={setZoom}
                   />
