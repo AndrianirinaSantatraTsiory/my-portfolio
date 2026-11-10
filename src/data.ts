@@ -7,7 +7,7 @@ export const profile = {
   city: "Antananarivo, Madagascar",
   github: "https://github.com/AndrianirinaSantatraTsiory",
   kaggle: "https://www.kaggle.com/santatraandrianirina",
-  cv: "/CV_Santatra_Tsiory_Andrianirina.pdf",
+  cv: "https://drive.google.com/file/d/1UlNouCV_CBmiK1YuE3aqKhEkRinnxmLa/view?usp=drive_link",
   codingame: "https://www.codingame.com/certification/Nr9MvkTo_mkkdcZiS0Ip3Q",
   about:
     "Diplômé d'un Master professionnel en Génie Logiciel et Base de Données, je construis des applications solides autour de l'écosystème Java. Je résous des problèmes d'algorithmique sur CodinGame et HackerRank, et j'ajoute la data science à mon travail pour automatiser et analyser.",
@@ -81,16 +81,16 @@ export const services = [
 
 /* Pour mettre une vraie capture : ajoutez le fichier dans /public/projects et renseignez "image". */
 export const projects = [
-  { name: "Assistant comptable intelligent", org: "ARATO", year: "2025", variant: "chat", image: "",
-    text: "Une plateforme web qui assiste les équipes comptables grâce à l'IA.",
-    tags: ["React", "TypeScript", "Spring Boot", "PostgreSQL"], link: "" },
-  { name: "Anjarahetrako", org: "DGI", year: "2022", variant: "phone", image: "",
-    text: "Une application mobile Android développée pour la Direction Générale des Impôts.",
-    tags: ["Java", "Android Studio"], link: "" },
-  { name: "Rapports Excel automatisés", org: "MCB", year: "2026", variant: "report", image: "",
+  { name: "Rapports Excel automatisés", org: "MCB", year: "2026", variant: "report", images: [],
     text: "Des scripts Python optimisés qui produisent les rapports Excel sans intervention manuelle.",
     tags: ["Python"], link: "" },
-  { name: "Gestion de stocks Odoo", org: "Chocolaterie Robert", year: "2023", variant: "stock", image: "",
+  { name: "Assistant comptable intelligent", org: "ARATO", year: "2025", variant: "chat", images: ["assistant_comptable_AI.png","photo.png"],
+    text: "Une plateforme web qui assiste les équipes comptables grâce à l'IA.",
+    tags: ["React", "TypeScript", "Spring Boot", "PostgreSQL", "RAG", "OCR"], link: "" },
+  { name: "Gestion de stocks Odoo", org: "Chocolaterie Robert", year: "2023", variant: "stock", images: ["odoo_dash.png","odoo_product.png","odoo_product_detail.png"],
     text: "Des modules Odoo sur mesure pour suivre les stocks de matières premières.",
-    tags: ["Python"], link: "" },
+    tags: ["Python", "odoo"], link: "" },
+  { name: "Anjarahetrako", org: "DGI", year: "2022", variant: "phone", images: [],
+    text: "Une application mobile Android développée pour la Direction Générale des Impôts.",
+    tags: ["Java", "Android Studio"], link: "" }
 ];

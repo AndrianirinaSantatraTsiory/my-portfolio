@@ -65,9 +65,34 @@ function Logo({ name, size = 28 }: { name: string; size?: number }) {
   return <img src={logos[name]} alt="" width={size} height={size} loading="lazy" onError={() => setBad(true)} />;
 }
 
-/* Aperçus d'interface improvisés : remplacez-les par vos captures via "image" dans data.ts */
-function Mockup({ variant, image, name }: { variant: string; image: string; name: string }) {
-  if (image) return <div className="shot"><img src={image} alt={`Aperçu de ${name}`} loading="lazy" /></div>;
+/* Aperçu d'un projet : galerie de captures (1 à n) ou maquette improvisée */
+type Shot = { srcs: string[]; index: number; name: string };
+
+function Mockup({ variant, images, name, onZoom }: { variant: string; images: string[]; name: string; onZoom: (s: Shot) => void }) {
+  const [i, setI] = useState(0);
+  if (images.length) {
+    const many = images.length > 1;
+    const go = (d: number) => setI((v) => (v + d + images.length) % images.length);
+    return (
+      <div className="shot gallery" style={{ "--img": `url("${images[i]}")` } as React.CSSProperties}>
+        <button type="button" className="shot-open" onClick={() => onZoom({ srcs: images, index: i, name })} aria-label={`Agrandir l'aperçu de ${name}`}>
+          <img key={images[i]} src={images[i]} alt={`Aperçu ${i + 1} sur ${images.length} de ${name}`} loading="lazy" />
+          <span className="zoom-hint" aria-hidden="true">⤢ Agrandir</span>
+        </button>
+        {many && (
+          <>
+            <button type="button" className="nav-btn prev" onClick={() => go(-1)} aria-label="Capture précédente">‹</button>
+            <button type="button" className="nav-btn next" onClick={() => go(1)} aria-label="Capture suivante">›</button>
+            <div className="dots-nav">
+              {images.map((_, k) => (
+                <button key={k} type="button" className={k === i ? "on" : ""} aria-label={`Capture ${k + 1}`} onClick={() => setI(k)} />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    );
+  }
   return (
     <div className={`shot mock ${variant}`} role="img" aria-label={`Aperçu improvisé de ${name}`}>
       <div className="mock-bar"><i /><i /><i /></div>
@@ -75,6 +100,37 @@ function Mockup({ variant, image, name }: { variant: string; image: string; name
       {variant === "phone" && (<div className="mock-body"><div className="phone"><span /><span /><span /><span className="btnx" /></div></div>)}
       {variant === "report" && (<div className="mock-body grid">{Array.from({ length: 18 }, (_, i) => <span key={i} className={i < 3 ? "h" : ""} />)}</div>)}
       {variant === "stock" && (<div className="mock-body"><div className="bars">{[60, 85, 40, 95, 70].map((h, i) => <span key={i} style={{ height: `${h}%` }} />)}</div></div>)}
+    </div>
+  );
+}
+
+/* Visionneuse plein écran : Échap / clic sur le fond / croix pour fermer, flèches pour naviguer */
+function Lightbox({ shot, onClose }: { shot: Shot; onClose: () => void }) {
+  const [i, setI] = useState(shot.index);
+  const total = shot.srcs.length;
+  const go = (d: number) => setI((v) => (v + d + total) % total);
+  useEffect(() => {
+    const key = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (total > 1 && e.key === "ArrowLeft") go(-1);
+      if (total > 1 && e.key === "ArrowRight") go(1);
+    };
+    window.addEventListener("keydown", key);
+    document.body.style.overflow = "hidden";
+    return () => { window.removeEventListener("keydown", key); document.body.style.overflow = ""; };
+  }, [total, onClose]);
+  const stop = (e: React.MouseEvent) => e.stopPropagation();
+  return (
+    <div className="lightbox" role="dialog" aria-modal="true" aria-label={`Aperçu de ${shot.name}`} onClick={onClose}>
+      <button type="button" className="lb-close" aria-label="Fermer" onClick={onClose}>×</button>
+      <img key={shot.srcs[i]} src={shot.srcs[i]} alt={`Aperçu ${i + 1} sur ${total} de ${shot.name}`} onClick={stop} />
+      {total > 1 && (
+        <>
+          <button type="button" className="lb-nav prev" aria-label="Capture précédente" onClick={(e) => { stop(e); go(-1); }}>‹</button>
+          <button type="button" className="lb-nav next" aria-label="Capture suivante" onClick={(e) => { stop(e); go(1); }}>›</button>
+          <span className="lb-count" onClick={stop}>{i + 1} / {total}</span>
+        </>
+      )}
     </div>
   );
 }
@@ -146,6 +202,7 @@ export default function App() {
   }, []);
 
   const [open, setOpen] = useState(false);
+  const [zoom, setZoom] = useState<Shot | null>(null);
   return (
     <>
       <div className="glow" ref={glow} aria-hidden="true" />
@@ -174,7 +231,7 @@ export default function App() {
             <p className="lead">Je conçois des API Java robustes et j'automatise les données pour qu'elles servent à décider.</p>
             <div className="cta">
               <a className="btn primary" href="#projets">Voir mes projets</a>
-              <a className="btn" href={profile.cv} download>Télécharger mon CV</a>
+              <a className="btn" href={profile.cv} download target="_blank">Télécharger mon CV</a>
             </div>
           </div>
           <div className="hero-side">
@@ -250,7 +307,12 @@ export default function App() {
             {projects.map((p, i) => (
               <Reveal key={p.name} delay={i * 70}>
                 <article className="project">
-                  <Mockup variant={p.variant} image={p.image} name={p.name} />
+                  <Mockup
+                    variant={p.variant}
+                    images={(p.images?.length ? p.images : p.image ? [p.image] : []).map((f) => `${import.meta.env.BASE_URL}${f}`)}
+                    name={p.name}
+                    onZoom={setZoom}
+                  />
                   <p className="meta">{p.org}, {p.year}</p>
                   <h3>{p.name}</h3>
                   <p>{p.text}</p>
@@ -302,6 +364,8 @@ export default function App() {
         </div>
         <p className="copy">© {new Date().getFullYear()} {profile.firstName} {profile.lastName}. Tous droits réservés.</p>
       </footer>
+
+      {zoom && <Lightbox shot={zoom} onClose={() => setZoom(null)} />}
     </>
   );
 }

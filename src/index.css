@@ -133,9 +133,58 @@ h1 { font-size: clamp(2.6rem, 7vw, 5.6rem); font-weight: 800; letter-spacing: -0
 .service a { display: inline-block; margin-top: 1rem; color: var(--teal); font-weight: 600; border-bottom: 1px solid transparent; }
 .service a:hover { border-color: var(--teal); }
 
+/* Aperçu de projet : pleine largeur de la carte (déborde du padding) */
 .project { overflow: hidden; }
-.shot { border-radius: 10px; overflow: hidden; margin: -0.4rem -0.4rem 1.2rem; border: 1px solid var(--line); background: #0c1b2d; aspect-ratio: 16 / 10; }
+.shot {
+  display: block; position: relative;
+  width: calc(100% + 3.2rem);
+  margin: -1.6rem -1.6rem 1.4rem;
+  aspect-ratio: 16 / 9;
+  border: 0; border-bottom: 1px solid var(--line); border-radius: 0;
+  background: #0c1b2d; overflow: hidden;
+}
 .shot > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Galerie : la capture entière est visible (contain), un fond flouté de la même image remplit les bords */
+.shot { aspect-ratio: 16 / 10; }
+.gallery::before { content: ""; position: absolute; inset: -24px; background: var(--img) center / cover; filter: blur(24px) brightness(0.45); }
+.gallery .shot-open img { position: relative; width: 100%; height: 100%; object-fit: contain; }
+
+/* Bouton d'agrandissement (zone image cliquable) */
+.shot-open { position: absolute; inset: 0; padding: 0; border: 0; background: none; cursor: zoom-in; color: inherit; font: inherit; }
+.shot-open img { animation: lb-in 0.3s ease both; }
+.zoom-hint { position: absolute; right: 0.8rem; bottom: 0.8rem; padding: 0.3rem 0.7rem; border-radius: 99px;
+  background: rgba(10, 22, 36, 0.85); border: 1px solid var(--line); font: 500 0.78rem var(--mono); color: var(--teal);
+  opacity: 0; transform: translateY(4px); transition: opacity 0.2s, transform 0.2s; }
+.shot-open:hover .zoom-hint, .shot-open:focus-visible .zoom-hint { opacity: 1; transform: none; }
+
+/* Navigation de la galerie dans la carte */
+.nav-btn { position: absolute; top: 50%; translate: 0 -50%; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line);
+  background: rgba(10, 22, 36, 0.8); color: var(--ink); font-size: 1.4rem; line-height: 1; cursor: pointer; z-index: 2;
+  opacity: 0; transition: opacity 0.2s, border-color 0.2s, color 0.2s; }
+.nav-btn.prev { left: 0.7rem; } .nav-btn.next { right: 0.7rem; }
+.gallery:hover .nav-btn, .nav-btn:focus-visible { opacity: 1; }
+.nav-btn:hover { border-color: var(--teal); color: var(--teal); }
+.dots-nav { position: absolute; left: 0; right: 0; bottom: 0.7rem; display: flex; justify-content: center; gap: 6px; z-index: 2; pointer-events: none; }
+.dots-nav button { pointer-events: auto; width: 9px; height: 9px; padding: 0; border-radius: 50%; border: 0; cursor: pointer; background: rgba(236, 230, 214, 0.45); }
+.dots-nav button.on { background: var(--teal); }
+@media (hover: none) { .zoom-hint, .nav-btn { opacity: 1; transform: none; } .nav-btn { translate: 0 -50%; } }
+
+/* Visionneuse plein écran */
+.lightbox { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: clamp(1rem, 4vw, 3rem);
+  background: rgba(5, 12, 20, 0.92); backdrop-filter: blur(6px); cursor: zoom-out; animation: lb-in 0.25s ease both; }
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 12px; border: 1px solid var(--line); box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6); cursor: default; }
+.lb-close { position: absolute; top: 1rem; right: 1.2rem; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line);
+  background: var(--bg2); color: var(--ink); font-size: 1.6rem; line-height: 1; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+.lb-close:hover { border-color: var(--teal); color: var(--teal); }
+.lb-nav { position: absolute; top: 50%; translate: 0 -50%; width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line);
+  background: var(--bg2); color: var(--ink); font-size: 1.8rem; line-height: 1; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+.lb-nav.prev { left: 1rem; } .lb-nav.next { right: 1rem; }
+.lb-nav:hover { border-color: var(--teal); color: var(--teal); }
+.lb-count { position: absolute; bottom: 1rem; left: 50%; translate: -50% 0; padding: 0.25rem 0.8rem; border-radius: 99px;
+  background: var(--bg2); border: 1px solid var(--line); font: 0.8rem var(--mono); color: var(--mute); cursor: default; }
+@keyframes lb-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* Maquettes improvisées */
 .mock-bar { display: flex; gap: 5px; padding: 0.5rem 0.7rem; background: rgba(255, 255, 255, 0.04); }
 .mock-bar i { width: 8px; height: 8px; border-radius: 50%; background: var(--mute); opacity: 0.5; }
 .mock-body { padding: 0.9rem; height: calc(100% - 26px); display: flex; flex-direction: column; gap: 0.5rem; }
