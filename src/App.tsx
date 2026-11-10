@@ -32,7 +32,8 @@ const CODE = `public class Developer {
   String city  = "Antananarivo";
   String[] stack = {
     "Java", "Spring Boot",
-    "Python", "PostgreSQL"
+    "Python", "React", "TypeScript", 
+    "PostgreSQL", "MySQL"
   };
 
   boolean solvesProblems() {

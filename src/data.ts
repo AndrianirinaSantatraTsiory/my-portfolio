@@ -41,9 +41,9 @@ export const stack = [
   { label: "Backend", items: ["Java", "Spring Boot", "Spring AI"] },
   { label: "Frontend", items: ["React", "TypeScript"] },
   { label: "Bases de données", items: ["PostgreSQL", "MySQL"] },
-  { label: "Data science & IA", items: ["Python", "Anaconda", "Power BI", "Spring AI", "RAG", "OCR"] },
-  { label: "Automatisation & BPMN", items: ["Camunda", "Odoo"] },
-  { label: "Outils", items: ["IntelliJ IDEA", "VS Code", "Android Studio", "Git", "Docker"] },
+  { label: "Data science", items: ["Python", "pandas", "NumPy"] },
+  { label: "Automatisation & BPMN", items: ["Camunda"] },
+  { label: "Outils", items: ["IntelliJ IDEA", "VS Code", "Android Studio", "Git", "Docker", "Anaconda", "Power BI"] },
 ];
 
 export const education = [
@@ -74,6 +74,8 @@ export const logos: Record<string, string> = {
   Camunda: `${simple}/camunda.svg`,
   "Power BI": `${simple}/powerbi.svg`,
   "Spring AI": `${dev}/spring/spring-original.svg`,
+  pandas : `${dev}/pandas/pandas-original.svg`, 
+  NumPy : `${dev}/numpy/numpy-original.svg`,
 };
 
 export const services = [
