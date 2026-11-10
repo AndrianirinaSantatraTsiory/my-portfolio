@@ -1,7 +1,8 @@
 export const profile = {
   firstName: "Santatra Tsiory",
   lastName: "ANDRIANIRINA",
-  role: "Développeur backend & Data scientist",
+  role: "Développeur fullstack - Data scientist",
+  lead: "Je conçois des applications web complètes, de l’API Java Spring Boot à l’interface React, et j’y intègre l’IA pour automatiser et assister les utilisateurs. J'ai aussi une compétence en data science pour analyser les données et aider à décider.",
   email: "andrianirinasantatratsiory@gmail.com",
   phone: "+261 34 96 309 68",
   city: "Antananarivo, Madagascar",
@@ -10,18 +11,18 @@ export const profile = {
   cv: "https://drive.google.com/file/d/1UlNouCV_CBmiK1YuE3aqKhEkRinnxmLa/view?usp=drive_link",
   codingame: "https://www.codingame.com/certification/Nr9MvkTo_mkkdcZiS0Ip3Q",
   about:
-    "Diplômé d'un Master professionnel en Génie Logiciel et Base de Données, je construis des applications solides autour de l'écosystème Java. Je résous des problèmes d'algorithmique sur CodinGame et HackerRank, et j'ajoute la data science à mon travail pour automatiser et analyser.",
+    "Développeur fullstack diplômé d'un Master professionnel en Génie Logiciel et Base de Données, je construis des applications de bout en bout : API Java et Spring Boot côté serveur, interfaces React et TypeScript côté client, bases PostgreSQL ou MySQL. J'ajoute à ce socle une compétence en data science (Python, analyse, automatisation, Power BI) et en intégration d'IA dans les applications (Spring AI, RAG, OCR). Je m'entraîne aussi à l'algorithmique sur CodinGame et HackerRank.",
 };
 
 export const experiences = [
   { period: "Juil. 2026 – Sept. 2026", title: "Consultant développeur", org: "MCB",
     text: "Amélioration et optimisation de scripts Python qui génèrent automatiquement des rapports Excel, orchestrés avec Dollar Universe.",
     tags: ["Python", "Excel", "Dollar Universe"] },
-  { period: "Juin 2025 – Nov. 2025", title: "Développeur web", org: "ARATO",
-    text: "Développement d'une plateforme intelligente d'assistance comptable avec React (TypeScript), Spring Boot, Spring AI et PostgreSQL.",
-    tags: ["React", "TypeScript", "Spring Boot", "Spring AI", "PostgreSQL"] },
+  { period: "Juin 2025 – Nov. 2025", title: "Développeur fullstack", org: "ARATO",
+    text: "Conception et développement d'une plateforme web d'assistance comptable, du frontend React (TypeScript) au backend Spring Boot et PostgreSQL, avec intégration d'un assistant IA (Spring AI, RAG, OCR).",
+    tags: ["React", "TypeScript", "Spring Boot", "Spring AI", "PostgreSQL", "RAG", "OCR"] },
   { period: "Sept. 2023 – Nov. 2023", title: "Stagiaire développeur Odoo", org: "Chocolaterie Robert",
-    text: "Développement de modules Odoo pour gérer les stocks de la chocolaterie.",
+    text: "Développement de modules Odoo sur mesure pour gérer les stocks de la chocolaterie.",
     tags: ["Odoo", "Python"] },
   { period: "Sept. 2022 – Nov. 2022", title: "Stagiaire développeur mobile", org: "DGI (Direction Générale des Impôts)",
     text: "Réalisation de l'application mobile « Anjarahetrako » avec Java et Android Studio.",
@@ -29,19 +30,21 @@ export const experiences = [
 ];
 
 export const skills = [
-  { name: "Java", level: 90 },
-  { name: "Spring Boot", level: 82 },
+  { name: "Java", level: 85 },
+  { name: "Spring Boot", level: 80 },
   { name: "Python", level: 70 },
   { name: "React", level: 55 },
   { name: "TypeScript", level: 55 },
 ];
 
 export const stack = [
-  { label: "Bases de données", items: ["MySQL", "PostgreSQL"] },
-  { label: "Automatisation & BPMN", items: ["Camunda"] },
-  { label: "Outils", items: ["IntelliJ IDEA", "VS Code", "Android Studio", "Git", "Docker", "Power BI", "Anaconda"] },
+  { label: "Backend", items: ["Java", "Spring Boot", "Spring AI"] },
+  { label: "Frontend", items: ["React", "TypeScript"] },
+  { label: "Bases de données", items: ["PostgreSQL", "MySQL"] },
+  { label: "Data science & IA", items: ["Python", "Anaconda", "Power BI", "Spring AI", "RAG", "OCR"] },
+  { label: "Automatisation & BPMN", items: ["Camunda", "Odoo"] },
+  { label: "Outils", items: ["IntelliJ IDEA", "VS Code", "Android Studio", "Git", "Docker"] },
 ];
-
 
 export const education = [
   { year: "2026", title: "Formations Data Science", where: "Kaggle Learn", link: "https://www.kaggle.com/santatraandrianirina" },
@@ -57,7 +60,7 @@ export const languages = [
 ];
 
 const dev = "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons";
-const simple = "https://jsdelivr.net";
+const simple = "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons";
 
 export const logos: Record<string, string> = {
   Java: `${dev}/java/java-original.svg`, "Spring Boot": `${dev}/spring/spring-original.svg`,
@@ -66,31 +69,31 @@ export const logos: Record<string, string> = {
   MySQL: `${dev}/mysql/mysql-original.svg`, Docker: `${dev}/docker/docker-original.svg`,
   Git: `${dev}/git/git-original.svg`, "IntelliJ IDEA": `${dev}/intellij/intellij-original.svg`,
   "VS Code": `${dev}/vscode/vscode-original.svg`, "Android Studio": `${dev}/androidstudio/androidstudio-original.svg`,
-  Anaconda: `${dev}/anaconda/anaconda-original.svg`, 
-  Odoo: `${simple}/odoo.svg`, 
-  Camunda: `${simple}/camunda.svg`, 
-  "Power BI": `${simple}/powerbi.svg`, 
+  Anaconda: `${dev}/anaconda/anaconda-original.svg`,
+  Odoo: `${simple}/odoo.svg`,
+  Camunda: `${simple}/camunda.svg`,
+  "Power BI": `${simple}/powerbi.svg`,
   "Spring AI": `${dev}/spring/spring-original.svg`,
 };
 
 export const services = [
-  { icon: "Java", title: "Développement backend", text: "API REST Java et Spring Boot, bases PostgreSQL ou MySQL, architecture propre et testable." },
-  { icon: "Python", title: "Data et automatisation", text: "Scripts Python, rapports Excel automatiques, tableaux de bord Power BI et workflows Camunda." },
-  { icon: "React", title: "Intégration web et IA", text: "Interfaces React et TypeScript branchées sur vos API, avec des fonctions d'IA via Spring AI." },
+  { icon: "React", title: "Développement fullstack", text: "Applications web de bout en bout : API REST Java et Spring Boot, interfaces React et TypeScript, bases PostgreSQL ou MySQL." },
+  { icon: "Python", title: "Data science et automatisation", text: "Analyse de données en Python, scripts et rapports Excel automatiques, tableaux de bord Power BI et workflows Camunda." },
+  { icon: "Spring AI", title: "Intégration d'IA dans vos applications", text: "Assistants intelligents, RAG et OCR branchés sur vos données via Spring AI, intégrés directement dans votre application." },
 ];
 
-/* Pour mettre une vraie capture : ajoutez le fichier dans /public/projects et renseignez "image". */
+/* Pour mettre de vraies captures : ajoutez les fichiers dans /public et listez-les dans "images" (1 à 3). */
 export const projects = [
-  { name: "Rapports Excel automatisés", org: "MCB", year: "2026", variant: "report", images: [],
-    text: "Des scripts Python optimisés qui produisent les rapports Excel sans intervention manuelle.",
-    tags: ["Python"], link: "" },
-  { name: "Assistant comptable intelligent", org: "ARATO", year: "2025", variant: "chat", images: ["assistant_comptable_AI.png","photo.png"],
-    text: "Une plateforme web qui assiste les équipes comptables grâce à l'IA.",
+  { name: "Assistant comptable intelligent", org: "ARATO", year: "2025", variant: "chat", images: ["assistant_comptable_AI.png", "photo.png"],
+    text: "Une plateforme fullstack qui assiste les équipes comptables grâce à l'IA : interface React, API Spring Boot, base PostgreSQL, avec RAG et OCR pour interroger et lire les documents.",
     tags: ["React", "TypeScript", "Spring Boot", "PostgreSQL", "RAG", "OCR"], link: "" },
-  { name: "Gestion de stocks Odoo", org: "Chocolaterie Robert", year: "2023", variant: "stock", images: ["odoo_dash.png","odoo_product.png","odoo_product_detail.png"],
+  { name: "Gestion de stocks Odoo", org: "Chocolaterie Robert", year: "2023", variant: "stock", images: ["odoo_dash.png", "odoo_product.png", "odoo_product_detail.png"],
     text: "Des modules Odoo sur mesure pour suivre les stocks de matières premières.",
-    tags: ["Python", "odoo"], link: "" },
-  { name: "Anjarahetrako", org: "DGI", year: "2022", variant: "phone", images: [],
+    tags: ["Python", "Odoo"], link: "" },
+  { name: "Rapports Excel automatisés", org: "MCB", year: "2026", variant: "report", images: [] as string[],
+    text: "Des scripts Python optimisés qui produisent les rapports Excel sans intervention manuelle.",
+    tags: ["Python", "Excel"], link: "" },
+  { name: "Anjarahetrako", org: "DGI", year: "2022", variant: "phone", images: [] as string[],
     text: "Une application mobile Android développée pour la Direction Générale des Impôts.",
-    tags: ["Java", "Android Studio"], link: "" }
+    tags: ["Java", "Android Studio"], link: "" },
 ];

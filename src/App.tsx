@@ -70,13 +70,19 @@ type Shot = { srcs: string[]; index: number; name: string };
 
 function Mockup({ variant, images, name, onZoom }: { variant: string; images: string[]; name: string; onZoom: (s: Shot) => void }) {
   const [i, setI] = useState(0);
+  const [ratio, setRatio] = useState(16 / 10); // le cadre épouse la 1re capture
   if (images.length) {
     const many = images.length > 1;
     const go = (d: number) => setI((v) => (v + d + images.length) % images.length);
     return (
-      <div className="shot gallery" style={{ "--img": `url("${images[i]}")` } as React.CSSProperties}>
+      <div className="shot gallery" style={{ aspectRatio: ratio }}>
         <button type="button" className="shot-open" onClick={() => onZoom({ srcs: images, index: i, name })} aria-label={`Agrandir l'aperçu de ${name}`}>
-          <img key={images[i]} src={images[i]} alt={`Aperçu ${i + 1} sur ${images.length} de ${name}`} loading="lazy" />
+          <img key={images[i]} src={images[i]} alt={`Aperçu ${i + 1} sur ${images.length} de ${name}`} loading="lazy"
+            onLoad={(e) => {
+              if (i !== 0) return;
+              const { naturalWidth: w, naturalHeight: h } = e.currentTarget;
+              if (w && h) setRatio(Math.min(2.2, Math.max(1.4, w / h)));
+            }} />
           <span className="zoom-hint" aria-hidden="true">⤢ Agrandir</span>
         </button>
         {many && (
@@ -228,7 +234,7 @@ export default function App() {
               <span className="line l2">{profile.lastName}</span>
             </h1>
             <p className="role">{profile.role}</p>
-            <p className="lead">Je conçois des API Java robustes et j'automatise les données pour qu'elles servent à décider.</p>
+            <p className="lead">{profile.lead}</p>
             <div className="cta">
               <a className="btn primary" href="#projets">Voir mes projets</a>
               <a className="btn" href={profile.cv} download target="_blank">Télécharger mon CV</a>

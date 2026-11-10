@@ -144,10 +144,10 @@ h1 { font-size: clamp(2.6rem, 7vw, 5.6rem); font-weight: 800; letter-spacing: -0
   background: #0c1b2d; overflow: hidden;
 }
 .shot > img { width: 100%; height: 100%; object-fit: cover; display: block; }
-/* Galerie : la capture entière est visible (contain), un fond flouté de la même image remplit les bords */
+/* Galerie : le cadre épouse le ratio de la 1re capture (voir App.tsx), la capture est vue en entier sur fond sombre uni */
 .shot { aspect-ratio: 16 / 10; }
-.gallery::before { content: ""; position: absolute; inset: -24px; background: var(--img) center / cover; filter: blur(24px) brightness(0.45); }
-.gallery .shot-open img { position: relative; width: 100%; height: 100%; object-fit: contain; }
+.gallery { background: #0c1b2d; }
+.gallery .shot-open img { width: 100%; height: 100%; object-fit: contain; }
 
 /* Bouton d'agrandissement (zone image cliquable) */
 .shot-open { position: absolute; inset: 0; padding: 0; border: 0; background: none; cursor: zoom-in; color: inherit; font: inherit; }
